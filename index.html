@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RL Replay — Outil coach pro pour analyser les replays Rocket League. Minimap, stats, possession, boost, graphiques. 100 % local.">
+    <title>RL Replay — Analyse de Replays Rocket League</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader">
+            <div class="loader-rocket">⚽</div>
+            <span class="loader-text">RL Replay</span>
+        </div>
+    </div>
+
+    <div id="app">
+        <header class="app-header">
+            <div class="header-brand">
+                <i data-lucide="scan-search" class="logo-icon"></i>
+                <div>
+                    <span class="brand-name">RL Replay</span>
+                    <span class="brand-tagline">Analyse de replays Rocket League</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <input type="file" id="replay-file-input" accept=".replay" multiple hidden>
+                <button class="btn-ghost" id="btn-glossary" title="Glossaire coach">
+                    <i data-lucide="book-open"></i> Glossaire
+                </button>
+                <button class="btn-primary" id="btn-upload-header">
+                    <i data-lucide="upload"></i> Charger .replay
+                </button>
+            </div>
+        </header>
+
+        <main id="view-container" class="view-container"></main>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

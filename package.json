@@ -1,0 +1,28 @@
+{
+  "name": "rl-replay",
+  "version": "2.0.0",
+  "description": "RL Replay — Analyseur de replays Rocket League",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhddno/RLReplay.git"
+  },
+  "keywords": ["rocket-league", "replay", "analysis", "wasm"],
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "rollup": "^4.61.1",
+    "vite": "^8.0.16",
+    "vite-plugin-node-polyfills": "^0.28.0",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0"
+  },
+  "dependencies": {
+    "@rlrml/subtr-actor": "^0.12.0"
+  }
+}
