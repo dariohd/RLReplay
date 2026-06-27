@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hhddno/RLReplay.git"
+    "url": "git+https://github.com/dariohd/RLReplay.git"
   },
   "keywords": ["rocket-league", "replay", "analysis", "wasm"],
   "license": "ISC",
