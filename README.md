@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml/badge.svg)](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml)
 
+![rl-replay.vercel.app](docs/screenshot.png)
+
 Outil coach **100 % navigateur** pour analyser les replays Rocket League — parsing WASM, aucun upload serveur.
 
 | | |
@@ -9,7 +11,7 @@ Outil coach **100 % navigateur** pour analyser les replays Rocket League — par
 | **URL production** | https://rl-replay.vercel.app |
 | **URL miroir** | https://dariohd.github.io/RLReplay/ |
 | **Dépôt GitHub** | [github.com/dariohd/RLReplay](https://github.com/dariohd/RLReplay) |
-| **Création** | Hugo Davion |
+| **Notes techniques** | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 
 ---
 
