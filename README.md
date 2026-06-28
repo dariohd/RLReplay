@@ -1,44 +1,122 @@
-# RL Replay
+# RL Replay — Documentation projet
 
-Outil coach pour analyser les replays Rocket League — 100 % client (WASM), sans upload.
+Outil coach **100 % navigateur** pour analyser les replays Rocket League — parsing WASM, aucun upload serveur.
 
-**Démo en ligne :** [https://dariohd.github.io/RLReplay/](https://dariohd.github.io/RLReplay/)
+| | |
+|---|---|
+| **URL production** | https://rl-replay.vercel.app |
+| **URL miroir** | https://dariohd.github.io/RLReplay/ |
+| **Dépôt GitHub** | [github.com/dariohd/RLReplay](https://github.com/dariohd/RLReplay) |
+| **Création** | Hugo Davion |
+
+---
+
+## Stack technique
+
+- **Vite 8** + JavaScript vanilla (ES modules)
+- **@rlrml/subtr-actor** — parsing replay en **WebAssembly**
+- **Canvas 2D** : minimap, graphiques, heatmaps
+- **Lucide** (icônes)
+- Polices auto-hébergées
+- Déploiement : **Vercel** + **GitHub Pages** (workflow CI)
+
+---
 
 ## Fonctionnalités coach
 
 - **Minimap 2D** + lecture frame par frame + marqueurs (buts, tirs, démos)
-- **Filtre équipe** : tous / bleu / orange / mon équipe
-- **Multi-replays** : charger plusieurs `.replay`, basculer entre eux, onglet **Comparer**
-- **Graphiques** : boost, positionnement, possession, distribution des tirs
-- **Glossaire** intégré (possession, last man, boost ledger, etc.)
-- Stats, boost, positionnement, touches, mécaniques, buts tagués, heatmaps
-- **Export JSON** complet
+- Filtre équipe : tous / bleu / orange / mon équipe
+- **Multi-replays** : charger plusieurs `.replay`, onglet **Comparer**
+- Graphiques : boost, positionnement, possession, distribution des tirs
+- Stats, touches, mécaniques, heatmaps
+- **Glossaire** intégré (possession, last man, boost ledger…)
+- **Export JSON** complet des analyses
+- Page **Mentions légales**
+- 100 % client : confidentialité totale (pas de serveur de replay)
 
-## Démarrage local
+---
+
+## Structure du projet
+
+```
+RLReplay/
+├── index.html, mentions-legales.html
+├── src/
+│   ├── main.js           # Point d'entrée, UI
+│   ├── parser.js         # WASM replay
+│   ├── minimap.js, charts.js, compare.js
+│   └── glossary.js
+├── css/styles.css
+├── fonts/
+├── public/               # Assets statiques Vite
+├── scripts/vendor-fonts.mjs
+├── vite.config.js
+├── vercel.json
+└── .github/workflows/deploy.yml
+```
+
+---
+
+## Prérequis
+
+- Node.js 20+
+- Fichiers `.replay` Rocket League (PC)
+
+---
+
+## Développement local
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Déploiement (GitHub Pages)
+→ **http://localhost:5173**
 
-Le workflow `.github/workflows/deploy.yml` build et déploie automatiquement sur chaque push vers `main`.
+---
 
-Pour activer GitHub Pages : **Settings → Pages → Source : GitHub Actions**.
+## Scripts
 
-Build manuel :
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Serveur Vite HMR |
+| `npm run build` | Build production → `dist/` |
+| `npm run preview` | Preview du build |
+
+---
+
+## Déploiement
+
+### Vercel (principal)
+
+Push `main` → déploiement automatique si projet lié.
+
+### GitHub Pages
+
+Workflow `.github/workflows/deploy.yml` sur push `main`.
+
+Build manuel avec base path :
 
 ```bash
 VITE_BASE_PATH=/RLReplay/ npm run build
 ```
 
-## Stack
+Activer : **Settings → Pages → Source : GitHub Actions**.
 
-- Vite + Vanilla JS
-- `@rlrml/subtr-actor` (WebAssembly)
-- Canvas 2D (minimap, graphiques, heatmaps)
+---
+
+## URLs propres
+
+`vercel.json` : `cleanUrls: true`, redirect mentions-legales.
+
+---
 
 ## Confidentialité
 
-Tout le parsing se fait dans le navigateur. Aucun replay n'est envoyé à un serveur.
+Tout le parsing s'exécute dans le navigateur via WASM. Aucun replay n'est transmis à un serveur tiers.
+
+---
+
+## Contact
+
+- **Développement** : Hugo Davion — [bulletonsite.com](https://bulletonsite.com)
