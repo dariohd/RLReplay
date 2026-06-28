@@ -1,7 +1,6 @@
-# RL Replay — Documentation projet
+# RL Replay
 
 [![CI](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml/badge.svg)](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml)
-[![Voir en ligne](https://img.shields.io/badge/Voir%20en%20ligne-→-0ea5e9?style=for-the-badge)](https://rl-replay.vercel.app)
 
 Outil coach **100 % navigateur** pour analyser les replays Rocket League — parsing WASM, aucun upload serveur.
 
