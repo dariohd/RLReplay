@@ -1,6 +1,6 @@
 # RL Replay
 
-[![CI](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml/badge.svg)](https://github.com/dariohd/RLReplay/actions/workflows/deploy.yml)
+[![CI](https://github.com/dariohd/RLReplay/actions/workflows/ci.yml/badge.svg)](https://github.com/dariohd/RLReplay/actions/workflows/ci.yml)
 
 ![rl-replay.vercel.app](docs/screenshot.png)
 
@@ -97,7 +97,7 @@ Push `main` → déploiement automatique si projet lié.
 
 ### GitHub Pages
 
-Workflow `.github/workflows/deploy.yml` sur push `main`.
+Workflow manuel `.github/workflows/deploy.yml` — lancer après avoir activé Pages (Settings → Pages → GitHub Actions).
 
 Build manuel avec base path :
 
