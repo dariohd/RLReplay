@@ -2,7 +2,26 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/mentions-legales.html", "destination": "/mentions-legales", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/mentions-legales.html",
+      "destination": "/mentions-legales",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://*.vercel.app https://bulletonsite.com https://www.bulletonsite.com https://dariohd.github.io http://localhost:3000 http://localhost:5174"
+        }
+      ]
+    }
   ]
 }
