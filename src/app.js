@@ -401,8 +401,8 @@ class App {
                 <div class="coach-kpi"><span class="kpi-label">Pression territ. ${this.glossLink('territorial_pressure')}</span><span class="kpi-value">${coach.teams.pressure.blue}s / ${coach.teams.pressure.orange}s</span></div>
                 <div class="coach-kpi"><span class="kpi-label">Camp adv. ${this.glossLink('field_pressure')}</span><span class="kpi-value">${coach.teams.fieldPressure?.blueOffSec ?? 0}s / ${coach.teams.fieldPressure?.orangeOffSec ?? 0}s</span></div>
             </div>
-            ${top ? `<p class="coach-insight">🏎️ Vitesse moy. max : <strong>${top.name}</strong> (${top.movement.avgSpeed} uu/s)</p>` : ''}
-            <div class="coach-mech-chips">${mech.map(m => `<span class="feature-chip">${m.label}: ${m.count}</span>`).join('')}</div>
+            ${top ? `<p class="coach-insight">🏎️ Vitesse moy. max : <strong>${escapeHtml(top.name)}</strong> (${top.movement.avgSpeed} uu/s)</p>` : ''}
+            <div class="coach-mech-chips">${mech.map(m => `<span class="feature-chip">${escapeHtml(m.label)}: ${m.count}</span>`).join('')}</div>
             <p class="hint-text">${coach.eventFeed.length} événements · <button type="button" class="link-btn" id="btn-gloss-from-summary">Glossaire coach</button></p>`;
         this.bindGlossTips(el);
         el.querySelector('#btn-gloss-from-summary')?.addEventListener('click', () => this.openGlossary());
@@ -735,9 +735,9 @@ class App {
             const tc = e.team === 0 ? 'team-blue' : (e.team === 1 ? 'team-orange' : '');
             return `<button class="timeline-event clickable" data-frame="${e.frame}">
                 <span class="tl-time">${formatTime(e.time)}</span>
-                <span class="tl-type">${e.label}</span>
-                ${e.player ? `<span class="tl-player ${tc}">${e.player}</span>` : ''}
-                ${e.detail ? `<span class="tl-detail">${e.detail}</span>` : ''}
+                <span class="tl-type">${escapeHtml(e.label)}</span>
+                ${e.player ? `<span class="tl-player ${tc}">${escapeHtml(e.player)}</span>` : ''}
+                ${e.detail ? `<span class="tl-detail">${escapeHtml(e.detail)}</span>` : ''}
             </button>`;
         }).join('');
         el.querySelectorAll('.clickable').forEach(btn => {
@@ -761,7 +761,7 @@ class App {
             ...sortedCounts.slice(0, 12).map(([k, v]) => [`evt.${k}`, v])
         ];
         el.innerHTML = entries.map(([k, v]) =>
-            `<div class="metadata-item"><span class="meta-label">${k}</span><span class="meta-value">${v ?? '—'}</span></div>`
+            `<div class="metadata-item"><span class="meta-label">${escapeHtml(k)}</span><span class="meta-value">${escapeHtml(v ?? '—')}</span></div>`
         ).join('');
     }
 
