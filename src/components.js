@@ -4,7 +4,11 @@ function showToast(message, type = 'info') {
     const icons = { success: '✅', error: '❌', info: 'ℹ️' };
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    toast.innerHTML = `<span>${icons[type] || ''}</span> ${message}`;
+    const icon = document.createElement('span');
+    icon.textContent = icons[type] || '';
+    toast.appendChild(icon);
+    toast.append(' ');
+    toast.append(document.createTextNode(String(message ?? '')));
     container.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3500);
 }

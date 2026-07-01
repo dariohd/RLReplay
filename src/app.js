@@ -1,5 +1,5 @@
 import { MinimapEngine, renderHeatmapCanvas } from './minimap.js';
-import { formatTime } from './utils.js';
+import { formatTime, escapeHtml, friendlyMapName } from './utils.js';
 import { glossaryHtml } from './glossary.js';
 import { renderBarChart, renderStackedChart, renderDonutChart, renderHistogram } from './charts.js';
 
@@ -268,7 +268,7 @@ class App {
             <span class="toolbar-label">Session (${this.replays.length})</span>
             ${this.replays.map(r => `
                 <button class="replay-chip ${r.id === this.activeReplayId ? 'active' : ''}" data-replay-id="${r.id}">
-                    <span class="replay-chip-name">${r.summary.filename}</span>
+                    <span class="replay-chip-name">${escapeHtml(r.summary.filename)}</span>
                     <span class="replay-chip-score">${r.summary.score}</span>
                 </button>
             `).join('')}
@@ -357,7 +357,7 @@ class App {
         el.innerHTML = list.map(p => {
             const acc = p.Shots > 0 ? Math.round((p.Goals / p.Shots) * 100) : 0;
             return `<div class="player-stat-card ${p.Team === 0 ? 'team-blue' : 'team-orange'}">
-                <div class="psc-name">${p.Name}</div>
+                <div class="psc-name">${escapeHtml(p.Name)}</div>
                 <div class="psc-score">${p.Score} pts</div>
                 <div class="psc-mini">
                     <span>⚽ ${p.Goals}</span><span>🅰️ ${p.Assists}</span>
@@ -378,7 +378,7 @@ class App {
             const c = p.Team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
             const acc = p.Shots > 0 ? Math.round((p.Goals / p.Shots) * 100) + '%' : '—';
             return `<tr>
-                <td style="color:${c};font-weight:700">${p.Name}</td>
+                <td style="color:${c};font-weight:700">${escapeHtml(p.Name)}</td>
                 <td>${p.Score}</td><td>${p.Goals}</td><td>${p.Assists}</td>
                 <td>${p.Saves}</td><td>${p.Shots}</td><td>${p.Demolitions || 0}</td><td>${acc}</td>
             </tr>`;
@@ -476,7 +476,7 @@ class App {
         </tr></thead><tbody>${players.map(p => {
             const c = p.team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
             return `<tr>
-                <td style="color:${c};font-weight:700">${p.name}</td>
+                <td style="color:${c};font-weight:700">${escapeHtml(p.name)}</td>
                 <td>${p.boost.avg}</td><td>${p.boost.timeZeroPct}</td><td>${p.boost.timeFullPct}</td>
                 <td>${p.boost.used}</td><td>${p.boost.collected}</td><td>${p.boost.stolen}</td>
                 <td>${p.boost.bigPads}</td><td>${p.boost.smallPads}</td>
@@ -495,7 +495,7 @@ class App {
         </tr></thead><tbody>${players.map(p => {
             const c = p.team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
             return `<tr>
-                <td style="color:${c};font-weight:700">${p.name}</td>
+                <td style="color:${c};font-weight:700">${escapeHtml(p.name)}</td>
                 <td>${p.positioning.defThirdPct}</td><td>${p.positioning.neuThirdPct}</td><td>${p.positioning.offThirdPct}</td>
                 <td>${p.positioning.behindBallPct}</td><td>${p.positioning.inFrontPct}</td>
                 <td>${p.positioning.mostBackPct}</td><td>${p.positioning.mostForwardPct}</td>
@@ -521,7 +521,7 @@ class App {
                 const m = p.mechanics;
                 const c = p.team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
                 return `<tr>
-                    <td style="color:${c};font-weight:700">${p.name}</td>
+                    <td style="color:${c};font-weight:700">${escapeHtml(p.name)}</td>
                     <td>${m.pass || 0}</td><td>${m.one_timer || 0}</td><td>${m.fifty_fifty || 0}</td>
                     <td>${m.speed_flip || 0}</td><td>${m.wavedash || 0}</td><td>${m.flick || 0}</td>
                     <td>${m.demo || 0}</td><td>${(m.wall_aerial || 0) + (m.ball_carry || 0)}</td>
@@ -541,7 +541,7 @@ class App {
             const t = p.touches;
             const c = p.team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
             return `<tr>
-                <td style="color:${c};font-weight:700">${p.name}</td>
+                <td style="color:${c};font-weight:700">${escapeHtml(p.name)}</td>
                 <td>${t.total}</td><td>${t.control}</td><td>${t.medium_hit}</td><td>${t.hard_hit}</td>
                 <td>${t.advance}</td><td>${t.retreat}</td><td>${p.passesCompleted}</td>
             </tr>`;
@@ -609,7 +609,7 @@ class App {
                 const c = p.team === 0 ? 'var(--accent-blue)' : 'var(--accent-orange)';
                 const cd = p.coach;
                 return `<tr>
-                    <td style="color:${c};font-weight:700">${p.name}</td>
+                    <td style="color:${c};font-weight:700">${escapeHtml(p.name)}</td>
                     <td>${cd.goalsConcededLastDefender}</td><td>${cd.goalsForMostBack}</td><td>${cd.goalsAgainstMostBack}</td>
                     <td>${cd.avgBoostOnGoalAgainst ?? '—'}</td>
                 </tr>`;
@@ -632,7 +632,7 @@ class App {
             players = players.filter(p => names.includes(p.name));
         }
         container.innerHTML = players.map(p =>
-            `<button class="btn-chip" data-heatmap="${p.name}">${p.name}</button>`
+            `<button class="btn-chip" data-heatmap="${escapeHtml(p.name)}">${escapeHtml(p.name)}</button>`
         ).join('');
         document.querySelectorAll('[data-heatmap]').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -705,7 +705,7 @@ class App {
             const s = r.summary;
             const active = r.id === this.activeReplayId;
             return `<tr class="${active ? 'row-active' : ''}">
-                <td>${s.filename}</td><td>${s.map}</td><td>${s.score}</td><td>${s.duration}</td>
+                <td>${escapeHtml(s.filename)}</td><td>${escapeHtml(s.map)}</td><td>${escapeHtml(s.score)}</td><td>${escapeHtml(s.duration)}</td>
                 <td>${s.possessionBlue}</td><td>${s.possessionOrange}</td>
                 <td>${s.avgBoostBlue}</td><td>${s.avgBoostOrange}</td><td>${s.shots}</td>
                 <td><button class="btn-chip" data-open-replay="${r.id}">Ouvrir</button></td>
