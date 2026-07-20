@@ -13,13 +13,19 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/bulle/:path*",
+      "destination": "https://bulle-chatbot.vercel.app/api/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self' data:; base-uri 'self'; object-src 'none'; frame-ancestors 'self' https://*.vercel.app https://bulletonsite.com https://www.bulletonsite.com https://dariohd.github.io http://localhost:3000 http://localhost:5174"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://bulle-chatbot.vercel.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://bulle-chatbot.vercel.app; font-src 'self' data:; base-uri 'self'; object-src 'none'; frame-ancestors 'self' https://*.vercel.app https://bulletonsite.com https://www.bulletonsite.com https://dariohd.github.io http://localhost:3000 http://localhost:5174"
         },
         {
           "key": "X-Content-Type-Options",
