@@ -4,3 +4,4 @@ dist
 replays/
 *.replay
 .vercel
+.env*
